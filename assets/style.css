@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serifs;
+    background-color: rgb(17, 17, 17);
+    margin: 0px;
+    display: block;
+    min-width: 730px;
+}
+
+#add-point-button {
+
+    background-color: rgb(27, 27, 27);
+    border: 2px solid rgb(58, 93, 207);
+    color: white;
+    width: 4vw;
+    height: 3vh;
+    border-radius: 1.5vh;
+}
+#add-car-button {
+
+    background-color: rgb(27, 27, 27);
+    border: 2px solid rgb(58, 93, 207);
+    color: white;
+    width: 4.5vw;
+    height: 4vh;
+    border-radius: 1.5vh;
+    font-size: 0.6vw;
+}
+#del-car-button {
+
+    background-color: rgb(27, 27, 27);
+    border: 2px solid rgb(207, 58, 58);
+    color: white;
+    margin-left: .5vw;
+    width: 4.5vw;
+    height: 4vh;
+    border-radius: 1.5vh;
+    font-size: 0.6vw;
+}
+
+#add-car-button:hover {
+
+    background-color: rgb(37, 37, 37);
+    cursor: pointer;
+}
+
+#del-car-button:hover {
+
+    background-color: rgb(37, 37, 37);
+    cursor: pointer;
+}
+
+#add-point-button:hover {
+
+    background-color: rgb(37, 37, 37);
+    cursor: pointer;
+}
+
+
+.input-field {
+
+    background-color: rgb(27, 27, 27);
+    border: 2px solid rgb(47, 47, 47);
+    border-radius: 1vh;
+    width: 13%;
+    height: 30px;
+    margin: 1vw;
+    color: white;
+}
+
+.asd{
+
+    background-color: red;
+    width: 100px;
+    height: 100vh;
+}
