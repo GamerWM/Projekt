@@ -32,7 +32,6 @@ app.layout = html.Div(children=[
                 id='car-table',
                 style_header={'background-color': 'rgb(47, 47, 47)', 'color': 'white'}
             ),
-        # ! Niedziała
         html.Div(id='car-stats-input-fields', children=[
             dcc.Input(id='name-input', className='input-field'),
             dcc.Input(id='speed-input', className='input-field'),
@@ -57,6 +56,12 @@ app.layout = html.Div(children=[
     ]),
     dcc.Store(id='road'),
     html.Button(children='Calculate', id='demo-button'),
+    
+    #Dodanie Javascriptu
+    html.Script(
+        src ='https://example.com/your-script.js',
+        type ='text/javascript'
+    ),
 ])
 
 #obslugiwanie akcji związanych z tabelą aut
