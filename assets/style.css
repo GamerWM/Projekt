@@ -1,43 +1,109 @@
 * {
+    
     box-sizing: border-box;
 }
 body {
+    
     font-family: Arial, Helvetica, sans-serifs;
     background-color: rgb(17, 17, 17);
     margin: 0px;
     display: block;
-    min-width: 730px;
+    overflow-x: hidden;
+}
+
+#all-side, #all-side-2 {
+
+    width: 91%;
+    display: block;
+    float: right;
+}
+
+.display-button {
+
+    width: 60%;
+    height: 10%;
+    background-color: #192230;
+    background-repeat: no-repeat;
+    color: whitesmoke;
+    margin: 10px auto;
+    display: block;
+    padding: 23px;
+    border: none;
+}
+
+#show-road {
+    background-image: url("insert.png");
+    background-size: 99%;
+}
+
+#show-results {
+    background-image: url("results.png");
+    background-size: 99%;
+}
+.display-button:hover {
+
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
 }
 
 #add-point-button {
 
+    width: 40%;
     background-color: rgb(27, 27, 27);
     border: 2px solid rgb(58, 93, 207);
     color: white;
-    width: 4vw;
-    height: 3vh;
     border-radius: 1.5vh;
+    margin: 0 5%;
+    padding: 3%;
+    display: block;
+    float: left;
 }
+
+#delete-point-button {
+
+    width: 40%;
+    background-color: rgb(27, 27, 27);
+    border: 2px solid rgb(207, 58, 58);
+    color: white;
+    margin: 0 5%;
+    border-radius: 1.5vh;
+    padding: 3%;
+    display: block;
+    float: left;
+}
+
+#menu-bar {
+
+    height: 100vh;
+    width: 8%;
+    background-color: #192230;
+    display: block;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 1;
+    float: left;
+}
+
 #add-car-button {
 
     background-color: rgb(27, 27, 27);
     border: 2px solid rgb(58, 93, 207);
     color: white;
-    width: 4.5vw;
-    height: 4vh;
+    width: 18%;
+    padding: 1.5%;
     border-radius: 1.5vh;
-    font-size: 0.6vw;
+    margin-left: 15%;
 }
 #del-car-button {
 
     background-color: rgb(27, 27, 27);
     border: 2px solid rgb(207, 58, 58);
     color: white;
-    margin-left: .5vw;
-    width: 4.5vw;
-    height: 4vh;
+    width: 18%;
+    padding: 1.5%;
     border-radius: 1.5vh;
-    font-size: 0.6vw;
+    margin-right: 15%;
 }
 
 #add-car-button:hover {
@@ -58,6 +124,11 @@ body {
     cursor: pointer;
 }
 
+#delete-point-button:hover {
+
+    background-color: rgb(37, 37, 37);
+    cursor: pointer;
+}
 
 .input-field {
 
@@ -66,7 +137,6 @@ body {
     border-radius: 1vh;
     width: 13%;
     height: 30px;
-    margin: 1vw;
     color: white;
 }
 
@@ -75,4 +145,61 @@ body {
     background-color: red;
     width: 100px;
     height: 100vh;
+}
+
+#demo-button {
+
+    width: 35%;
+    background-color: rgb(27, 27, 27);
+    border: 2px solid rgb(58, 93, 207);
+    border-radius: 1.5vh;
+    font-size: 150%;
+    color: white;
+    padding: 1%;
+    margin: 30px 35%;
+}
+
+#demo-button:hover {
+
+    background-color: rgb(37, 37, 37);
+    cursor: pointer;
+}
+
+#graph-velocity, #graph-acceleration {
+
+    width: 50%;
+    float: left;
+}
+
+#car-stats-table{
+    width: 60%;
+    padding-right: 6%;
+    float: right;
+}
+
+#input-point {
+
+    width: 25%;
+    padding: 0px 2% 1% 2%;
+    float: right;
+}
+
+#input-point > .input-field{
+
+    width:100%;
+    margin-bottom: 5%;
+    display: block;
+}
+
+#car-stats-input-fields > .input-field {
+
+    width: 15%;
+    margin: 2% 0px 3% 5%;
+    display: block;
+    float: left;
+}
+
+.dash-header {
+    width: 20%;
+    align-items: center;
 }

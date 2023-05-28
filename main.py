@@ -15,14 +15,15 @@ def blank_figure():
 
 #stylizowanie strony
 app.layout = html.Div(children=[
+    html.Div(id='menu-bar', children=[      
+        html.Button(id='show-road', className='display-button', n_clicks=0),
+        html.Button(id='show-results', className='display-button', n_clicks=0)
+    ]),
     html.Div(id='all-side', children=[
-        dcc.Graph(id='road-graph', style={'width':'100vw', 'margin-left':'0'}, figure=blank_figure()),
-        dcc.Input(id='x-input', className='input-field', style={'margin-left':'5vw'}),
-        dcc.Input(id='y-input', className='input-field'),
-        html.Button(id='add-point-button', children='Add Point', n_clicks=0, style={'width' : '7vw'}),
-        html.Div(id='new-point', style={'margin':'20px 20vw'}, children=[
-            
-            
+        dcc.Graph(id='road-graph', style={'width':'100%', 'margin':'0'}, figure=blank_figure()),
+    ]),
+
+        html.Div(id='car-stats-table', children=[
             dash_table.DataTable(columns=[
                 {'name': i, 'id': i, 'selectable': True} for i in ['Name', 'Max speed', 'Max acceleration', 'Min acceleration', 'Mass']
             ],  data=[], 
@@ -31,7 +32,8 @@ app.layout = html.Div(children=[
                 id='car-table',
                 style_header={'background-color': 'rgb(47, 47, 47)', 'color': 'white'}
             ),
-
+        # ! Niedziała
+        html.Div(id='car-stats-input-fields', children=[
             dcc.Input(id='name-input', className='input-field'),
             dcc.Input(id='speed-input', className='input-field'),
             dcc.Input(id='max-acc-input', className='input-field'),
@@ -40,15 +42,21 @@ app.layout = html.Div(children=[
             html.Button(id='add-car-button', children='Add', n_clicks=0),
             html.Button(id='del-car-button', children='Delete', n_clicks=0),
             dcc.Store(id='cars')
-        ])
+        ]),
+        ]),
+    html.Div(id='input-point', children=[
+        dcc.Input(id='x-input', className='input-field'),
+        dcc.Input(id='y-input', className='input-field'),
+        html.Button(id='add-point-button', children='Add Point', n_clicks=0),
+        html.Button(id='delete-point-button', children='Delete Point', n_clicks=0),
     ]),
     
-    html.Div(id='all-side-2', style={'display':'None'}, children=[
-        dcc.Graph(id='graph-velocity', style={'width':'50%', 'float':'left'}, figure=blank_figure()),
-        dcc.Graph(id='graph-acceleration', style={'width':'50%', 'float':'left'}, figure=blank_figure())
+    html.Div(id='all-side-2', style={'display':'block'}, children=[
+        dcc.Graph(id='graph-velocity', figure=blank_figure()),
+        dcc.Graph(id='graph-acceleration', figure=blank_figure())
     ]),
     dcc.Store(id='road'),
-    html.Button(children='Click Me', id='demo-button', style={'margin':'30px 35%', 'padding': '1%', 'font-size' : '150%', 'width' : '30%'}),
+    html.Button(children='Calculate', id='demo-button'),
 ])
 
 #obslugiwanie akcji związanych z tabelą aut
@@ -113,23 +121,30 @@ def add_point(click, x_value, y_value, road):
         # Output(component_id='graph-velocity', component_property='figure'),
         # Output(component_id='graph-acceleration', component_property='figure'),
         Output(component_id='all-side-2', component_property='style'),
-        Input(component_id='demo-button', component_property='n_clicks'),
+        Output(component_id='all-side', component_property='style'),
+        Input(component_id='show-road', component_property='n_clicks'),
+        Input(component_id='show-results', component_property='n_clicks'),
         State(component_id='all-side-2', component_property='style'),
+        State(component_id='all-side', component_property='style'),
         prevent_initial_call=True
 
 )
-def display_section(click, style):
-    if click == None:
-        raise PreventUpdate
-    
-    style = dict(style)
-    if style['display'] == 'None':
-        style['display'] = 'Block'
-    elif style['display'] == 'Block':
-        style['display'] = 'None'
-    
-    print(style)
-    return style
+def display_section(click1, click2, style_result, style_road):
+    triggered_id = ctx.triggered_id
+
+    if triggered_id == 'show-road':
+        if style_road['display']=='None':
+            style_road['display']=='Block'
+        elif style_road['display']=='Block':
+            style_road['display']=='None'
+
+    elif triggered_id == 'show-result':
+        if style_result['display']=='None':
+            style_result['display']=='Block'
+        elif style_result['display']=='Block':
+            style_result['display']=='None'
+        
+    return style_result, style_road
 
 # def buttonPressed(value):
 #     if value == None:
