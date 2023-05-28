@@ -1,8 +1,15 @@
-function changeWidth(){
-    alert("Test");
-    /*document.getElementById*/
+if (!window.dash_clientside) {
+    window.dash_clientside = {};
 }
-
-const show_road = document.getElementById("show-results");
-
-show_road.addEventListener("click", changeWidth);
+console.log("Test");
+window.dash_clientside.clientside = {
+    changeWidth: function() {
+        console.log("Test1");
+        var allSideElements = document.querySelectorAll('#all-side, #all-side-2');
+        allSideElements.forEach(function(element) {
+            console.log("Test2");
+            element.style.width = '50%';
+        });
+        return window.dash_clientside.no_update;
+    }
+}

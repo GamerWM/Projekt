@@ -59,7 +59,7 @@ app.layout = html.Div(children=[
     
     #Dodanie Javascriptu
     html.Script(
-        src ='https://example.com/your-script.js',
+        src ='assets/script.js defer',
         type ='text/javascript'
     ),
 ])
@@ -107,6 +107,7 @@ def delete_car(data):
         State(component_id='road', component_property='data'),
         prevent_initial_call=True
 )
+
 def add_point(click, x_value, y_value, road):
     if x_value == '' or y_value == '':
         raise PreventUpdate
@@ -134,6 +135,7 @@ def add_point(click, x_value, y_value, road):
         prevent_initial_call=True
 
 )
+    
 def display_section(click1, click2, style_result, style_road):
     triggered_id = ctx.triggered_id
 
@@ -143,7 +145,7 @@ def display_section(click1, click2, style_result, style_road):
         elif style_road['display']=='Block':
             style_road['display']=='None'
 
-    elif triggered_id == 'show-result':
+    elif triggered_id == 'show-results':
         if style_result['display']=='None':
             style_result['display']=='Block'
         elif style_result['display']=='Block':
@@ -170,6 +172,7 @@ def display_section(click1, click2, style_result, style_road):
 #         fig2.update_layout(template='plotly_dark')
 
 #         return fig, fig2
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)
