@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, Input, Output, State, dash_table, ctx
+from dash import Dash, html, dcc, Input, Output, State, dash_table, ctx, ClientsideFunction
 from simulator import Simulator
 import plotly.graph_objects as go
 from dash.exceptions import PreventUpdate
@@ -19,7 +19,7 @@ app.layout = html.Div(children=[
         html.Button(id='show-road', className='display-button', n_clicks=0),
         html.Button(id='show-results', className='display-button', n_clicks=0)
     ]),
-    html.Div(id='all-side', children=[
+    html.Div(id='all-side', style = {'width' : '91%'}, children=[
         dcc.Graph(id='road-graph', style={'width':'100%', 'margin':'0'}, figure=blank_figure()),
     ]),
 
@@ -129,29 +129,36 @@ def add_point(click, x_value, y_value, road):
         Output(component_id='all-side-2', component_property='style'),
         Output(component_id='all-side', component_property='style'),
         Input(component_id='show-road', component_property='n_clicks'),
-        Input(component_id='show-results', component_property='n_clicks'),
+ #       Input(component_id='show-results', component_property='n_clicks'),
         State(component_id='all-side-2', component_property='style'),
         State(component_id='all-side', component_property='style'),
         prevent_initial_call=True
 
 )
-    
-def display_section(click1, click2, style_result, style_road):
-    triggered_id = ctx.triggered_id
 
-    if triggered_id == 'show-road':
-        if style_road['display']=='None':
-            style_road['display']=='Block'
-        elif style_road['display']=='Block':
-            style_road['display']=='None'
+def change_width(n_clicks, style_all_side_2, style_all_side):
+    if n_clicks and style_all_side_2 is not None and style_all_side is not None:
+        style_all_side_2['width'] = '50%'
+        style_all_side['width'] = '50%'
 
-    elif triggered_id == 'show-results':
-        if style_result['display']=='None':
-            style_result['display']=='Block'
-        elif style_result['display']=='Block':
-            style_result['display']=='None'
-        
-    return style_result, style_road
+    return style_all_side_2, style_all_side
+
+#def display_section(click1, click2, style_result, style_road):
+#    triggered_id = ctx.triggered_id
+#
+#    if triggered_id == 'show-road':
+#        if style_road['display']=='None':
+#            style_road['display']=='Block'
+#        elif style_road['display']=='Block':
+#            style_road['display']=='None'
+#
+#    elif triggered_id == 'show-results':
+#        if style_result['display']=='None':
+#            style_result['display']=='Block'
+#        elif style_result['display']=='Block':
+ #           style_result['display']=='None'
+ #       
+#    return style_result, style_road
 
 # def buttonPressed(value):
 #     if value == None:
