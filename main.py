@@ -157,19 +157,25 @@ def change_width(n_clicks, n_clicks_2, style_all_side_2, velocity, acceleration,
         style_all_side['width'] = '45.5%'
         style_all_side['float'] = 'left'
         style_all_side['margin-left'] = '9%'
+        style_all_side['display'] = 'block'
         input_point['width'] = '45.5%'
         input_point['margin-left'] = '9%'
         input_point['float'] = 'none'
         input_point['padding-top'] = '2%'
+        input_point['display'] = 'block'
         car_stats_table['float'] = 'none'
         car_stats_table['width'] = '45.5%'
         car_stats_table['margin-left'] = '11%'
+        car_stats_table['display'] = 'block'
         demo_button['margin-top'] = '15%'
+        demo_button['display'] = 'block'
 
         return style_all_side_2, velocity, acceleration, style_all_side, input_point, car_stats_table, demo_button
 
 
-    if n_clicks_2 and style_all_side_2 is not None and style_all_side is not None:
+    if n_clicks_2 and style_all_side_2 is not None:
+        style_all_side_2['width'] = '91%'
+        style_all_side_2['display'] = 'block'
         style_all_side['display'] = 'None'
         input_point['display'] = 'None'
         car_stats_table['display'] = 'None'
