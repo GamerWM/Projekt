@@ -19,11 +19,11 @@ app.layout = html.Div(children=[
         html.Button(id='show-road', className='display-button', n_clicks=0),
         html.Button(id='show-results', className='display-button', n_clicks=0)
     ]),
-    html.Div(id='all-side', style = {'width' : '91%'}, children=[
+    html.Div(id='all-side', style = {'width' : '91%', 'display': 'block'}, children=[
         dcc.Graph(id='road-graph', style={'width':'100%', 'margin':'0'}, figure=blank_figure()),
     ]),
 
-        html.Div(id='car-stats-table', children=[
+        html.Div(id='car-stats-table', style={'display' : 'block'}, children=[
             dash_table.DataTable(columns=[
                 {'name': i, 'id': i, 'selectable': True} for i in ['Name', 'Max speed', 'Max acceleration', 'Min acceleration', 'Mass']
             ],  data=[], 
@@ -43,19 +43,19 @@ app.layout = html.Div(children=[
             dcc.Store(id='cars')
         ]),
         ]),
-    html.Div(id='input-point', children=[
+    html.Div(id='input-point', style = {'display' : 'block'}, children=[
         dcc.Input(id='x-input', className='input-field'),
         dcc.Input(id='y-input', className='input-field'),
         html.Button(id='add-point-button', children='Add Point', n_clicks=0),
         html.Button(id='delete-point-button', children='Delete Point', n_clicks=0),
     ]),
     
-    html.Div(id='all-side-2', style={'display':'block'}, children=[
-        dcc.Graph(id='graph-velocity', figure=blank_figure()),
-        dcc.Graph(id='graph-acceleration', figure=blank_figure())
+    html.Div(id='all-side-2', style={'width': '91%', 'display':'block'}, children=[
+        dcc.Graph(id='graph-velocity', style = {'width' : '50%'}, figure=blank_figure()),
+        dcc.Graph(id='graph-acceleration', style = {'width' : '50%'}, figure=blank_figure())
     ]),
     dcc.Store(id='road'),
-    html.Button(children='Calculate', id='demo-button'),
+    html.Button(children='Calculate', style = {'display':'block'}, id='demo-button'),
     
     #Dodanie Javascriptu
     html.Script(
@@ -127,38 +127,55 @@ def add_point(click, x_value, y_value, road):
         # Output(component_id='graph-velocity', component_property='figure'),
         # Output(component_id='graph-acceleration', component_property='figure'),
         Output(component_id='all-side-2', component_property='style'),
+        Output(component_id='graph-velocity', component_property='style'),
+        Output(component_id='graph-acceleration', component_property='style'),
         Output(component_id='all-side', component_property='style'),
+        Output(component_id='input-point', component_property='style'),
+        Output(component_id='car-stats-table', component_property='style'),
+        Output(component_id='demo-button', component_property='style'),
         Input(component_id='show-road', component_property='n_clicks'),
- #       Input(component_id='show-results', component_property='n_clicks'),
+        Input(component_id='show-results', component_property='n_clicks'),
         State(component_id='all-side-2', component_property='style'),
+        State(component_id='graph-velocity', component_property='style'),
+        State(component_id='graph-acceleration', component_property='style'),
         State(component_id='all-side', component_property='style'),
+        State(component_id='input-point', component_property='style'),
+        State(component_id='car-stats-table', component_property='style'),
+        State(component_id='demo-button', component_property='style'),
         prevent_initial_call=True
 
 )
 
-def change_width(n_clicks, style_all_side_2, style_all_side):
-    if n_clicks and style_all_side_2 is not None and style_all_side is not None:
-        style_all_side_2['width'] = '50%'
-        style_all_side['width'] = '50%'
+def change_width(n_clicks, n_clicks_2, style_all_side_2, velocity, acceleration, style_all_side, input_point, car_stats_table, demo_button):
+    if n_clicks and style_all_side is not None:
+        style_all_side_2['width'] = '45.5%'
+        style_all_side_2['position'] = 'absolute'    
+        style_all_side_2['top'] = '0px'    
+        style_all_side_2['right'] = '0px'   
+        velocity['width'] = '100%'
+        acceleration['width'] = '100%' 
+        style_all_side['width'] = '45.5%'
+        style_all_side['float'] = 'left'
+        style_all_side['margin-left'] = '9%'
+        input_point['width'] = '45.5%'
+        input_point['margin-left'] = '9%'
+        input_point['float'] = 'none'
+        input_point['padding-top'] = '2%'
+        car_stats_table['float'] = 'none'
+        car_stats_table['width'] = '45.5%'
+        car_stats_table['margin-left'] = '11%'
+        demo_button['margin-top'] = '15%'
 
-    return style_all_side_2, style_all_side
+        return style_all_side_2, velocity, acceleration, style_all_side, input_point, car_stats_table, demo_button
 
-#def display_section(click1, click2, style_result, style_road):
-#    triggered_id = ctx.triggered_id
-#
-#    if triggered_id == 'show-road':
-#        if style_road['display']=='None':
-#            style_road['display']=='Block'
-#        elif style_road['display']=='Block':
-#            style_road['display']=='None'
-#
-#    elif triggered_id == 'show-results':
-#        if style_result['display']=='None':
-#            style_result['display']=='Block'
-#        elif style_result['display']=='Block':
- #           style_result['display']=='None'
- #       
-#    return style_result, style_road
+
+    if n_clicks_2 and style_all_side_2 is not None and style_all_side is not None:
+        style_all_side['display'] = 'None'
+        input_point['display'] = 'None'
+        car_stats_table['display'] = 'None'
+        demo_button['display'] = 'None'
+        return style_all_side_2, velocity, acceleration, style_all_side, input_point, car_stats_table, demo_button
+
 
 # def buttonPressed(value):
 #     if value == None:
